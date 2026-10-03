@@ -99,7 +99,7 @@ class Settings:
 def load_settings() -> Settings:
     return Settings(
         ollama_host=normalise_host(_env_str("OLLAMA_HOST", "http://127.0.0.1:11434")),
-        model=_env_str("THALI_MODEL", "gemma4:e4b"),
+        model=_env_str("THALI_MODEL", "gemma4:cloud"),
         timeout=_env_float("THALI_TIMEOUT", 180.0, 1.0),
         health_timeout=_env_float("THALI_HEALTH_TIMEOUT", 3.0, 0.5),
         max_retries=_env_int("THALI_MAX_RETRIES", 2, 0),
