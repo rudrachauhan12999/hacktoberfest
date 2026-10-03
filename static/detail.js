@@ -216,19 +216,15 @@ function changeServings(delta, act) {
 }
 
 async function save() {
-  if (S.logId && !S.dirty) {
-    if (isDesktop()) toast("No changes to save"); else closeDetail();
-    return;
-  }
+  if (S.logId && !S.dirty) { closeDetail(); return; }
   const body = { item: S.item, servings: S.servings, explanation: S.explanation };
   try {
     const entry = S.logId
       ? await api(`/api/log/${S.logId}`, { method: "PUT", json: body })
-      : await api("/api/log", { method: "POST", json: { ...body, thumbnail: S.thumbnail || null } });
-    Object.assign(S, { logId: entry.id, loggedAt: entry.logged_at, evaluation: entry.evaluation, dirty: false, error: null });
+      : await api("/api/log", { method: "POST", json: { ...body, thumbnail: S.thumbnail || null, day: S.day || null } });
     toast("Saved to your log");
+    closeDetail();
     hooks.onSaved(entry);
-    if (isDesktop()) render("done"); else closeDetail();
   } catch (error) {
     S.error = error.message;
     render("done");

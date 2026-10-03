@@ -299,6 +299,7 @@ async function start() {
     openDetail({
       item: result.item, evaluation: result.evaluation, explanation: result.explanation,
       thumbnail: result.thumbnail, photoUrl: result.photoUrl, harness: result.harness,
+      day: state.day,   // save against the day selected in the week strip
     });
     markCurrent();
   });

@@ -7,6 +7,7 @@ and macros) and a JSON payload holding the full item and its evaluation.
 
 from __future__ import annotations
 
+import threading
 from datetime import date, datetime
 from typing import Any, Iterator, Optional
 
@@ -75,6 +76,7 @@ class LogEntry(Base):
 
 _engine: Optional[Engine] = None
 _session_factory: Optional[sessionmaker[Session]] = None
+_init_lock = threading.Lock()
 
 
 def init_db(url: Optional[str] = None) -> Engine:
@@ -98,7 +100,10 @@ def init_db(url: Optional[str] = None) -> Engine:
 def get_session() -> Iterator[Session]:
     """FastAPI dependency: one session per request."""
     if _session_factory is None:
-        init_db()
+        # The page's first requests arrive together; only one may create the tables.
+        with _init_lock:
+            if _session_factory is None:
+                init_db()
     assert _session_factory is not None
     with _session_factory() as session:
         yield session
