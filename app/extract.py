@@ -168,9 +168,13 @@ MEAL_PROMPT = """\
 You are estimating the nutrition of one meal as served to one person. Reply with JSON.
 
 Rules:
+- Use exactly these keys: dish_name, items, calories_min, calories_max, protein_g_min,
+  protein_g_max, carbs_g_min, carbs_g_max, fat_g_min, fat_g_max, likely_ingredients.
 - dish_name: a short English name for the meal.
-- items: each food in the meal with an estimated portion, such as "2 rotis" or "1 cup".
-- Give every nutrient as a range with a minimum and a maximum.
+- items: each food in the meal as an object {"name": ..., "portion": ...}, with an
+  estimated portion such as "2 pieces" or "1 cup".
+- Give every nutrient as a range: the _min and _max keys are numbers, calories in kcal
+  and the others in grams.
 - Widen the range when the portion size or the amount of oil, ghee or butter is uncertain.
 - Keep calories consistent with the macros: about 4 kcal per gram of protein,
   4 per gram of carbohydrate and 9 per gram of fat.
@@ -215,7 +219,9 @@ def normalise_meal(data: dict, has_photo: bool = True) -> dict:
 
     parts = []
     for part in data.get("items") or []:
-        if isinstance(part, dict) and isinstance(part.get("name"), str) and part["name"].strip():
+        if isinstance(part, str) and part.strip():
+            parts.append({"name": part.strip()[:160], "portion": ""})
+        elif isinstance(part, dict) and isinstance(part.get("name"), str) and part["name"].strip():
             portion = part.get("portion")
             parts.append({
                 "name": part["name"].strip()[:160],

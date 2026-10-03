@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6F6F8">
+  <title>My Thali</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%2317171C'/%3E%3Ccircle cx='12' cy='12' r='6' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/DMSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#views">Skip to content</a>
+
+  <div class="layout" id="layout">
+    <div class="col-left">
+      <main id="views" tabindex="-1">
+        <section id="view-home" class="view" aria-label="Home"></section>
+        <section id="view-progress" class="view" aria-label="Progress" hidden></section>
+        <section id="view-profile" class="view" aria-label="Profile" hidden></section>
+        <section id="view-about" class="view" aria-label="About" hidden></section>
+      </main>
+
+      <div class="dock">
+        <nav class="pill-nav" aria-label="Main">
+          <a href="#home" data-nav="home"></a>
+          <a href="#progress" data-nav="progress"></a>
+          <a href="#profile" data-nav="profile"></a>
+          <a href="#about" data-nav="about"></a>
+        </nav>
+        <button type="button" class="fab" id="fab" aria-label="Scan a label or a meal"></button>
+      </div>
+    </div>
+
+    <aside class="col-right" id="detail" aria-label="Food details"></aside>
+  </div>
+
+  <dialog class="scan" id="scan" aria-labelledby="scan-title">
+    <form method="dialog" class="scan-head">
+      <h2 id="scan-title">Scan food</h2>
+      <button class="icon-btn" id="scan-close" aria-label="Close"></button>
+    </form>
+
+    <div class="segmented" role="group" aria-label="What are you scanning?">
+      <button type="button" data-mode="label" aria-pressed="true">Nutrition label</button>
+      <button type="button" data-mode="meal" aria-pressed="false">Meal</button>
+    </div>
+
+    <div class="drop" id="drop">
+      <div class="drop-choose" id="drop-choose">
+        <div class="drop-buttons">
+          <button type="button" class="big-btn" id="btn-upload"><span data-icon="upload"></span>Upload photo</button>
+          <button type="button" class="big-btn" id="btn-camera"><span data-icon="camera"></span>Take photo</button>
+        </div>
+        <p class="muted small" id="drop-hint">Or drag a photo here.</p>
+      </div>
+
+      <div class="camera" id="camera" hidden>
+        <video id="camera-video" playsinline muted aria-label="Camera preview"></video>
+        <div class="camera-actions">
+          <button type="button" class="btn outline" id="camera-cancel">Cancel</button>
+          <button type="button" class="btn" id="camera-capture">Capture</button>
+        </div>
+      </div>
+
+      <div class="preview" id="preview" hidden>
+        <img id="preview-img" alt="Photo to analyze">
+        <button type="button" class="btn outline small-btn" id="preview-remove">Remove photo</button>
+      </div>
+    </div>
+
+    <input type="file" id="file-input" accept="image/*" hidden aria-label="Choose a photo">
+    <input type="file" id="capture-input" accept="image/*" capture="environment" hidden aria-label="Take a photo">
+
+    <div class="field" id="desc-wrap" hidden>
+      <label for="desc">Describe the dish (optional)</label>
+      <textarea id="desc" maxlength="600" rows="3" placeholder="For example: 2 rotis, dal tadka and a spoon of ghee"></textarea>
+      <p class="muted small counter"><span id="desc-count">0</span>/600</p>
+    </div>
+
+    <p class="error" id="scan-error" role="alert" hidden></p>
+
+    <button type="button" class="btn wide" id="btn-analyze">Analyze</button>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
