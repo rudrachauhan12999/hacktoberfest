@@ -23,7 +23,7 @@ STATIC_DIR = BASE_DIR / "static"
 # Fixed by the pipeline design rather than by deployment.
 MAX_IMAGE_SIDE = 1600
 JPEG_QUALITY = 88
-THUMBNAIL_SIDE = 240
+THUMBNAIL_SIDE = 480
 DESCRIPTION_MAX_CHARS = 600
 
 
