@@ -15,8 +15,7 @@ nutrition goals, allergens, and dietary preferences.
 
 ## Why MyThali?
 
-Most AI food apps ask an LLM to directly decide whether a food is
-"good" or "safe".
+"A common approach is to ask an LLM to both interpret a food image and decide whether the food fits a user's profile
 
 MyThali separates **AI perception from deterministic decision-making**:
 
@@ -139,12 +138,14 @@ If no attempt passes, the API returns `needs_retake` and asks for a better photo
 
 The same model, `gemma4:e4b`, reads every label photo twice: once with a plain prompt, and once through the MyThali pipeline (JSON schema, verifier, retry loop).
 
-<!-- REPLACE this table with the output of `python eval/run_eval.py` (eval/results.md) -->
+The benchmark measures:
 
-| System | Label photos | Valid JSON | Field accuracy | Avg attempts | Allergen misses |
-|---|---|---|---|---|---|
-| Raw prompt | N | __% | __% | 1.0 | __ |
-| MyThali pipeline | N | __% | __% | __ | __ |
+- JSON validity
+- Field accuracy
+- Average retry attempts
+- Allergen misses
+
+Run `python eval/run_eval.py` to reproduce the evaluation locally.
 
 Field accuracy counts a number as correct within 5% or 1 unit. An allergen miss is an allergen present on the label that the system did not flag. How to reproduce: [Reproduce the evaluation](#reproduce-the-evaluation).
 
