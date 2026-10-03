@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local configuration
+.env
+.env.*
+
+# App data (the food log and profile stay on this machine)
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+data/
+
+# Evaluation images are private photos; the CSV and results are tracked
+eval/images/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
