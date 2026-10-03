@@ -324,7 +324,7 @@ tests/
 
 ## Team
 
-**AlgoHolics**: NAMES_HERE. Built at Hacktoberfest Hack Day Surat.
+**AlgoHolics**: Anushka,Jatin,Rudra,Samih. Built at Hacktoberfest Hack Day Surat.
 
 ## Disclaimer
 
