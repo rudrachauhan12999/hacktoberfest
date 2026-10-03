@@ -5,7 +5,8 @@
 Scan a nutrition label or photograph a meal, and see how it fits your
 nutrition goals, allergens, and dietary preferences.
 
-**[ Live Demo Link](https://deeper-kelkoo-capital-orlando.trycloudflare.com)** 
+ **[Live Demo Website](https://deeper-kelkoo-capital-orlando.trycloudflare.com)** ·
+ **[ Demo Video](https://youtu.be/tjyje2ME2ys)**
 
 ![MyThali Home](mythali-home.jpeg)
 
